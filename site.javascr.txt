@@ -1,0 +1,182 @@
+const field = document.querySelector('.field');
+const GRID_SIZE = 450;
+const GRID_WIDTH = 30;
+const GRID_HEIGHT = 15;
+
+let CURRENT_COLOR = 'rgb(255, 102, 46)';
+const DEFAULT_COLOR = 'rgb(62, 62, 62)';
+
+const COLOR_MAP = {
+    red: 'rgb(255, 102, 46)',
+    green: 'rgb(26, 218, 84)',
+    blue: 'rgb(83, 15, 255)',
+    yellow: 'rgb(255, 236, 26)',
+    skyblue: 'rgb(142, 229, 255)'
+};
+
+const COLORS = [
+    'rgb(62, 62, 62)',
+    'rgb(255, 102, 46)',
+    'rgb(26, 218, 84)',
+    'rgb(83, 15, 255)',
+    'rgb(255, 236, 26)',
+    'rgb(142, 229, 255)'
+];
+
+let IS_CLICKED = false;
+let FILL_MODE = false;
+
+
+for (let i = 0; i < GRID_SIZE; i++) {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    cell.setAttribute('id', i);
+    cell.style.backgroundColor = DEFAULT_COLOR;
+    field.appendChild(cell);
+}
+
+let cells = document.querySelectorAll('.cell');
+
+
+cells.forEach(cell => {
+
+    cell.addEventListener('mousedown', function () {
+
+        if (FILL_MODE) {
+            const cell_id = parseInt(cell.getAttribute('id'));
+
+            anime({
+                targets: '.cell',
+                backgroundColor: CURRENT_COLOR,
+                easing: 'easeInOutQuad',
+                duration: 500,
+                delay: anime.stagger(50, {
+                    grid: [GRID_WIDTH, GRID_HEIGHT],
+                    from: cell_id
+                })
+            });
+
+            setTimeout(() => {
+                cells.forEach(c => {
+                    c.style.backgroundColor = CURRENT_COLOR;
+                });
+            }, 1000);
+
+        } else {
+            cell.style.backgroundColor = CURRENT_COLOR;
+        }
+    });
+
+    cell.addEventListener('mouseover', function () {
+        if (IS_CLICKED && !FILL_MODE) {
+            cell.style.backgroundColor = CURRENT_COLOR;
+        }
+    });
+
+});
+
+document.addEventListener('mousedown', () => IS_CLICKED = true);
+document.addEventListener('mouseup', () => IS_CLICKED = false);
+
+
+document.querySelectorAll('.color-cell').forEach(color_cell => {
+
+    color_cell.addEventListener('click', function () {
+
+        FILL_MODE = false;
+
+        const selected = document.querySelector('.selected');
+        if (selected) selected.classList.remove('selected');
+
+        this.classList.add('selected');
+
+        for (let color in COLOR_MAP) {
+            if (this.classList.contains(color)) {
+                CURRENT_COLOR = COLOR_MAP[color];
+                break;
+            }
+        }
+    });
+
+});
+
+
+document.querySelector('.eraser').addEventListener('click', function () {
+
+    FILL_MODE = false;
+    CURRENT_COLOR = DEFAULT_COLOR;
+
+    const selected = document.querySelector('.selected');
+    if (selected) selected.classList.remove('selected');
+
+    this.classList.add('selected');
+});
+
+
+document.querySelector('.fill-tool').addEventListener('click', function () {
+
+    FILL_MODE = true;
+
+    const selected = document.querySelector('.selected');
+    if (selected) selected.classList.remove('selected');
+
+    this.classList.add('selected');
+});
+
+function saveToCookie() {
+    let result = '';
+
+    cells.forEach(cell => {
+        const color = cell.style.backgroundColor;
+        const index = COLORS.indexOf(color);
+        result += index !== -1 ? index.toString() : '0';
+    });
+
+    document.cookie = `pixel-result=${result};max-age=100000`;
+}
+
+setInterval(saveToCookie, 60000);
+
+function getResultFromCookie() {
+
+    const cookies = document.cookie.split('; ');
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].split('=');
+
+        if (cookie[0] === 'pixel-result') {
+            return cookie[1];
+        }
+    }
+
+    return '0'.repeat(GRID_SIZE);
+}
+
+const savedResult = getResultFromCookie();
+
+if (savedResult && savedResult.length === GRID_SIZE) {
+
+    for (let i = 0; i < GRID_SIZE; i++) {
+        const colorIndex = parseInt(savedResult[i]);
+        if (!isNaN(colorIndex)) {
+            cells[i].style.backgroundColor = COLORS[colorIndex];
+        }
+    }
+}
+
+document.querySelector('.save-tool').addEventListener('click', function () {
+
+    domtoimage.toJpeg(field, { quality: 0.95 })
+        .then(function (dataUrl) {
+
+            const link = document.createElement('a');
+            link.download = 'pixel.jpg';
+            link.href = dataUrl;
+            link.click();
+
+        })
+        .catch(function (error) {
+            console.error('Ошибка сохранения:', error);
+        });
+
+});

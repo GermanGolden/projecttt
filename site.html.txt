@@ -1,0 +1,107 @@
+<html lang="en">
+
+<head>
+  <title>Pixel Go</title>
+  <script src="https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/dist/dom-to-image.min.js"></script>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FONT AWESOME ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+</head>
+
+<body>
+  <div class='field-container'>
+    <div class='color-palette'>
+      <div class='color-cell red selected'></div>
+      <div class='color-cell green'></div>
+      <div class='color-cell blue'></div>
+      <div class='color-cell yellow'></div>
+      <div class='color-cell skyblue'></div>
+      <div class='tool-cell eraser'></div>
+        <img scr='https://grizly.club/uploads/posts/2023-01/1674662963_grizly-club-p-lastik-klipart-14.png' alt=''>
+      </div>
+      <div class='tool-cell fill-tool'>
+        <img scr='https://cdn-icons-png.flaticon.com/512/2708/2708370.png' alt=''>
+        </div>
+      </div>
+      <div class='field'></div>
+      </div>
+  <div id="up" class="head">
+    <div class="head-container">
+      <header>
+        <div class="logo">
+          <a href=""><img src="https://png.pngtree.com/png-vector/20260111/ourmid/pngtree-pixel-art-pink-heart-icon-illustration-vector-png-image_18478432.webp"style="width: 50px; height: auto; alt="tinyone-logo"></a>
+          <p>Pixel Go</p>
+        </div>
+        <div class="socials">
+          <ul>
+            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </header>
+      <div class="hero">
+        <h1>Рисуй прямо на сайте!</h1>
+        <p>Мы сделали сайт, где любой желающий может порисовать и вдохновиться, став художником или программистом.<br>рисуй на нашем сайте!</p>
+        <button type="button" href="">Начать</button>
+        <a href="#arrow-link"><i class="fa fa-long-arrow-down fa-lg" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+  <div id="arrow-link" class="services-container">
+    <div class="h-p-group">
+    
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-form">
+        <h2>Sign up for our newsletter</h2>
+        <p>We send emails with news, articles and information about our promotions.<br>No junk mail, we promise!</p>
+        <form>
+          <input type="email" name="mail" placeholder="Введите свой адрес электронной почты" required>
+          <input type="submit" value="Отправить на рассмотрение">
+        </form>
+      </div>
+
+      <div class="block">
+        <div class="footer-contacts">
+          <h5>Pixel OOO</h5>
+          <address>67, Дин Дин, Обувной,<br> Ываг, Россия</address>
+          <a href="mailto:contact@halovietnam.com">123@67.com</a>
+          <a href="tel:+844123456789">+888 8 888</a>
+        </div>
+        <div class="footer-nav">
+          <ul>
+            <li><a href="#">Примеры</a></li>
+            <li><a href="#">Магазин</a></li>
+            <li><a href="#">Лицензия</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">Соцсети</a></li>
+            <li><a href="#">О нас</a></li>
+            <li><a href="#">Условия</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">Скачать</a></li>
+            <li><a href="#">Поддержка</a></li>
+            <li><a href="#">Документы</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">Медио</a></li>
+            <li><a href="#">Блог</a></li>
+            <li><a href="#">Форумы</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div id="up-btn">
+    <a href="#up"><i class="fa fa-3x fa-chevron-up" aria-hidden="true"></i></a>
+  </div>
+</body>
+</html>
